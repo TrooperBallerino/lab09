@@ -14,8 +14,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.util.List;
+// import java.nio.file.Files;
+// import java.util.List;
 import java.util.Random;
 
 /**
@@ -42,8 +42,13 @@ public class BadIOGUI {
     public BadIOGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
+        final JPanel innerCanvas = new JPanel();
+        innerCanvas.setLayout(new BoxLayout(innerCanvas, BoxLayout.Y_AXIS));
+        canvas.add(innerCanvas, BorderLayout.CENTER);
         final JButton write = new JButton("Write on file");
-        canvas.add(write, BorderLayout.CENTER);
+        innerCanvas.add(write);
+        final JButton read = new JButton("Read a file");
+        innerCanvas.add(read);
         frame.setContentPane(canvas);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         /*
@@ -90,6 +95,11 @@ public class BadIOGUI {
          * on screen. Results may vary, but it is generally the best choice.
          */
         frame.setLocationByPlatform(true);
+
+        /*
+         * We use JFrame.pack to resize the frame to the minimum size
+         */
+        frame.pack();
         /*
          * OK, ready to push the frame onscreen
          */
