@@ -74,6 +74,15 @@ public class BadIOGUI {
                 }
             }
         );
+
+        read.addActionListener(
+            new ActionListener() {
+                @Override
+                public void actionPerformed(final ActionEvent ignored) {
+                    System.out.println("String from Read Button!");
+                }
+            }
+        );
     }
 
     private void display() {
