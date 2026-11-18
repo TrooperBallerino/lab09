@@ -9,8 +9,8 @@ import java.io.FileWriter;
  * Application controller. Performs the I/O.
  */
 public class Controller {
-    private static final String STD_FILE = System.getProperty("user.home")
-        + System.getProperty("file.seprator")
+    public static final String STD_FILE = System.getProperty("user.home")
+        + File.separator
         + "output.txt";
     private File currentFile;
 

@@ -6,7 +6,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.io.PrintStream;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,9 +20,7 @@ import javax.swing.JTextArea;
 public final class SimpleGUI {
 
     private final JFrame frame = new JFrame();
-    private final String PATH = System.getProperty("user.home")
-        + System.getProperty("file.separator")
-        + "simpleGUIsavefile.txt";
+    private final Controller controller = new Controller();
     private static final int PROPORTION = 5;
 
     public SimpleGUI() {
@@ -40,11 +37,10 @@ public final class SimpleGUI {
             new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ignored) {
-                    try (PrintStream ps = new PrintStream(PATH)) {
-                        ps.print(textArea.getText());
+                    try {
+                        controller.writeFile(textArea.getText());
                     }  catch (final IOException e) {
                         JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
-                        e.printStackTrace(); // NOPMD: allowed as this is just an exercise
                     } 
 
                 }
