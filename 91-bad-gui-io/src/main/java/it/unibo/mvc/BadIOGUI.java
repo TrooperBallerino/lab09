@@ -45,7 +45,7 @@ public class BadIOGUI {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
         final JPanel innerCanvas = new JPanel();
-        innerCanvas.setLayout(new BoxLayout(innerCanvas, BoxLayout.Y_AXIS));
+        innerCanvas.setLayout(new BoxLayout(innerCanvas, BoxLayout.X_AXIS));
         canvas.add(innerCanvas, BorderLayout.CENTER);
         final JButton write = new JButton("Write on file");
         innerCanvas.add(write);
@@ -82,7 +82,7 @@ public class BadIOGUI {
                 @Override
                 public void actionPerformed(final ActionEvent ignored) {
                     try {
-                        IO.println(Files.readAllLines(Path.of(PATH), StandardCharsets.UTF_8).toString());
+                        IO.println(Files.readAllLines(Path.of(PATH), StandardCharsets.UTF_8));
                     } catch (final IOException e) {
                         JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
                         e.printStackTrace(); // NOPMD: allowed as this is just an exercise
