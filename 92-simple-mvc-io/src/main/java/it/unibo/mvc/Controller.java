@@ -2,20 +2,23 @@ package it.unibo.mvc;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.io.FileWriter;
 
 /**
- * 
  * Application controller. Performs the I/O.
  */
 public class Controller {
+    /**
+     * Default file where the controller writes.
+     */
     public static final String STD_FILE = System.getProperty("user.home")
         + File.separator
         + "output.txt";
     private File currentFile;
 
     /**
-     * Creates a new Controller
+     * Creates a new Controller.
      * By default, the file is output.txt inside the user home directory
      */
     public Controller() {
@@ -27,7 +30,7 @@ public class Controller {
      * 
      * @param newFile the File that will be set as current file
      */
-    public void setCurrentFile(File newFile) {
+    public void setCurrentFile(final File newFile) {
         this.currentFile = newFile;
     }
 
@@ -56,8 +59,8 @@ public class Controller {
      * @throws IOException if occurs some error during the writing
      */
     public void writeFile(final String input) throws IOException {
-        var fileWriter = new FileWriter(currentFile);
-        fileWriter.write(input);
-        fileWriter.close();
+        try (var fileWriter = new FileWriter(currentFile, StandardCharsets.UTF_8)) {
+            fileWriter.write(input);
+        }
     }
 }

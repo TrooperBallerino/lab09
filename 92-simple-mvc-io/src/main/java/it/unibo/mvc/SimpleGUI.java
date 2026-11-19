@@ -14,15 +14,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
 /**
- * A very simple program using a graphical interface.
- * 
+ * This class is a simple application that save a text written by the user in a file.
+ *
+ * <p>
+ * The user cannot change the file where they write in
+ * (the standard file is choosen in {@see Controller})
  */
 public final class SimpleGUI {
 
+    private static final int PROPORTION = 5;
     private final JFrame frame = new JFrame();
     private final Controller controller = new Controller();
-    private static final int PROPORTION = 5;
 
+    /**
+     * Creates a new SimpleGUI.
+     */
     public SimpleGUI() {
         final JPanel canvas = new JPanel();
         canvas.setLayout(new BorderLayout());
@@ -36,10 +42,10 @@ public final class SimpleGUI {
         saveButton.addActionListener(
             new ActionListener() {
                 @Override
-                public void actionPerformed(ActionEvent ignored) {
+                public void actionPerformed(final ActionEvent ignored) {
                     try {
                         controller.writeFile(textArea.getText());
-                    }  catch (final IOException e) {
+                    } catch (final IOException e) {
                         JOptionPane.showMessageDialog(frame, e, "Error", JOptionPane.ERROR_MESSAGE);
                     } 
 
@@ -48,6 +54,9 @@ public final class SimpleGUI {
         );
     }
 
+    /**
+     * Set the size and display of the SimpleGUI windows.
+     */
     private void display() {
         final Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
         final int sw = (int) screen.getWidth();
@@ -58,6 +67,9 @@ public final class SimpleGUI {
         frame.setVisible(true);
     }
 
+    /**
+     * Launches the application.
+     */
     public static void main() {
         new SimpleGUI().display();
     }
